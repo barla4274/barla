@@ -35,6 +35,10 @@ customer_orders as (
 
 ),
 
+country as (
+    select customer_id,country from {{ ref('country') }}
+),
+
 final as (
 
     select
@@ -48,6 +52,7 @@ final as (
     from customers
 
     left join customer_orders using (customer_id)
+    left join customer using (customer_id)
 
 )
 
